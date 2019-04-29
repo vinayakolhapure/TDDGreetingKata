@@ -157,5 +157,31 @@ public class GreetingTest {
 		assertEquals(expected, actual);
 	}
 	
+	/*
+	 * Bonus! Test the replace of double quotes for the next test case.
+	 * */
+	@Test
+	public void whenStringHasQuotesAtStartAndEnd_removeThem() {
+		String name = "\"Charlie, Dianne\"";
+		
+		String expected = "Charlie, Dianne";
+		String actual = name.replace("\"", "");
+		
+		assertEquals(expected, actual);
+	}
 	
+	/*
+	 * when "Bob", "\"Charlie, Dianne\""
+	 * then "Hello, Bob and Charlie, Dianne."
+	 * */
+	
+	@Test
+	public void whenNamesTogetherWithEscape_thenDontSplitNames () {
+		String[] names = new String[] {"Bob", "\"Charlie, Dianne\""};
+		String expected = "Hello, Bob and Charlie, Dianne.";
+		String actual = g.hello(names);
+		
+		assertEquals(expected, actual);
+		
+	}
 }

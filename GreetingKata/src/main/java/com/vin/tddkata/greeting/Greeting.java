@@ -36,32 +36,31 @@ public class Greeting {
 				shout.add(name);
 				isShout = true;
 			} else {
-				if(!name.contains(",")) {
-					normal.add(name);
-				} else {
+				if(name.contains(",") && !name.contains("\"")) {
 					String[] splitNames = name.split(", ");
 					for(String splitName : splitNames) {
 						normal.add(splitName);
 					}
+				} else {
+					normal.add(name.replace("\"", ""));
+					//normal.add(name);
 				}
 			}
 		}
 
 		int normalN = normal.size();
 
-		// "Hello, Amy and Charlotte. AND HELLO BRIAN!"
 		if (normal != null && normal.size() == 1) {
 			greet = hello(normal.get(0));
 		} else if (normal != null && normal.size() == 2) {
 			greet = greet + normal.get(0) + " and " + normal.get(1) + NORMAL_END;
-		} else { // "Hello, Amy, Brian, and Charlotte."
+		} else {
 			for (int i = 0; i < normalN - 1; i++) {
 				greet = greet + normal.get(i) + ", ";
 			}
 			greet = greet + "and " + normal.get(normalN - 1) + NORMAL_END;
 		}
 		
-		//Hello, Amy and Charlotte. AND HELLO BRIAN AND DAX!
 		if(isShout) {
 			String shoutGreet = " AND HELLO ";
 			if(shout.size() == 1) {
